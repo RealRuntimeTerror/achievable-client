@@ -1,0 +1,7 @@
+{
+  "name": "achievable",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
