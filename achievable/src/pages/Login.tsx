@@ -6,26 +6,26 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import ExploreContainer from "../components/ExploreContainer";
-import "./Tab3.css";
+import "./Login.css";
 
-const Tab3: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Groups</IonTitle>
+          <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Groups</IonTitle>
+            <IonTitle size="large">Login</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Groups Page" />
+        <ExploreContainer name="Login Page" />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab3;
+export default Login;
