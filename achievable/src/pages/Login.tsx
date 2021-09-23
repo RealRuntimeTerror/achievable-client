@@ -8,13 +8,23 @@ import {
 import ExploreContainer from "../components/ExploreContainer";
 import "./Login.css";
 import GoogleLogin from 'react-google-login';
+import {useState} from 'react';
 
-const responseGoogle = (response: any) => {
-  console.log(response);
-  console.log(response.profileObj);
-}
+
+
+
+
 
 const Login: React.FC = () => {
+  const [ profile, setProfile ] = useState({name:'',imageUrl:'',googleId:'',email:''});
+
+  const responseGoogle = (response: any) => {
+    console.log(response);
+    console.log(response.profileObj);
+    if(response.profileObj!=null)
+      setProfile(response.profileObj);
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -35,6 +45,11 @@ const Login: React.FC = () => {
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
         />
+        <br/>
+        <img src={profile.imageUrl} alt={profile.name}/>
+        <p>name:&#09;{profile.name}</p>
+        <p>email:&#09;{profile.email}</p>
+        <p>googleId:&#09;{profile.googleId}</p>
       </IonContent>
     </IonPage>
   );
