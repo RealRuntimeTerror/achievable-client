@@ -17,7 +17,6 @@ import {useState, IUser, IState} from '../StateContext';
 const Login: React.FC = () => {
   
   const {state, setState} = useState();
-  console.log(state);
 
   const responseGoogle = (response: any) => {
     console.log(response);

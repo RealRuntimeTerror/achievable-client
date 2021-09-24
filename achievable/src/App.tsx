@@ -41,6 +41,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import Login from "./pages/Login";
+import TabBar from "./TabBar"
 import {StateContext, IState} from './StateContext';
 import React from "react";
 
@@ -49,6 +50,17 @@ import React from "react";
 function App() {
   const [state, setState] = React.useState({} as IState)
 
+  //sign in page
+  if(!state.isSignedIn)
+  return (
+    <StateContext.Provider value={{ state, setState }}>
+      <IonApp>
+            <Login />
+  </IonApp>
+    </StateContext.Provider>
+  );
+  //after sign in
+  else
   return (
     <StateContext.Provider value={{ state, setState }}>
       <IonApp>
@@ -57,9 +69,6 @@ function App() {
         <IonRouterOutlet>
           <Route exact path="/tab1">
             <Tab1 />
-          </Route>
-          <Route exact path="/login">
-            <Login />
           </Route>
           <Route exact path="/tab2">
             <Tab2 />
@@ -72,10 +81,6 @@ function App() {
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="login" href="/login">
-            <IonIcon icon={fingerPrint} />
-            <IonLabel>Login</IonLabel>
-          </IonTabButton>
           <IonTabButton tab="tab1" href="/tab1">
             <IonIcon icon={person} />
             <IonLabel>Profile</IonLabel>
