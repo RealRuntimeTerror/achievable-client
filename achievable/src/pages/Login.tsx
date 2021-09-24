@@ -8,21 +8,28 @@ import {
 import ExploreContainer from "../components/ExploreContainer";
 import "./Login.css";
 import GoogleLogin from 'react-google-login';
-import {useState} from 'react';
-
-
-
+import {useContext} from 'react';
+import {useState, IUser, IState} from '../StateContext';
+ 
 
 
 
 const Login: React.FC = () => {
-  const [ profile, setProfile ] = useState({name:'',imageUrl:'',googleId:'',email:''});
+  
+  const {state, setState} = useState();
+  console.log(state);
 
   const responseGoogle = (response: any) => {
     console.log(response);
     console.log(response.profileObj);
     if(response.profileObj!=null)
-      setProfile(response.profileObj);
+      setState({
+        user:{
+        name:response.profileObj.name,
+        googleId:response.profileObj.googleId,
+        imageUrl:response.profileObj.imageUrl},
+        isSignedIn: true
+      })
   }
 
   return (
@@ -46,10 +53,7 @@ const Login: React.FC = () => {
             cookiePolicy={'single_host_origin'}
         />
         <br/>
-        <img src={profile.imageUrl} alt={profile.name}/>
-        <p>name:&#09;{profile.name}</p>
-        <p>email:&#09;{profile.email}</p>
-        <p>googleId:&#09;{profile.googleId}</p>
+        <p>sign in status: {state.isSignedIn?"siged in successfully":"not signed in"}</p>
       </IonContent>
     </IonPage>
   );
