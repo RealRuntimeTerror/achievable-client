@@ -41,7 +41,6 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import Login from "./pages/Login";
-import TabBar from "./TabBar"
 import {StateContext, IState} from './StateContext';
 import React from "react";
 
