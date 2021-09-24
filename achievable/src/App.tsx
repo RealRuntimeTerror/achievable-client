@@ -41,8 +41,67 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import Login from "./pages/Login";
+import {StateContext, IState} from './StateContext';
+import React from "react";
 
+
+
+function App() {
+  const [state, setState] = React.useState({} as IState)
+
+  //sign in page
+  if(!state.isSignedIn)
+  return (
+    <StateContext.Provider value={{ state, setState }}>
+      <IonApp>
+            <Login />
+  </IonApp>
+    </StateContext.Provider>
+  );
+  //after sign in
+  else
+  return (
+    <StateContext.Provider value={{ state, setState }}>
+      <IonApp>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path="/tab1">
+            <Tab1 />
+          </Route>
+          <Route exact path="/tab2">
+            <Tab2 />
+          </Route>
+          <Route path="/tab3">
+            <Tab3 />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/tab1" />
+          </Route>
+        </IonRouterOutlet>
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="tab1" href="/tab1">
+            <IonIcon icon={person} />
+            <IonLabel>Profile</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab2" href="/tab2">
+            <IonIcon icon={pieChart} />
+            <IonLabel>Analytics</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab3" href="/tab3">
+            <IonIcon icon={people} />
+            <IonLabel>Groups</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    </IonReactRouter>
+  </IonApp>
+    </StateContext.Provider>
+  );
+}
+/*
 const App: React.FC = () => (
+  <UserContext.Provider value={{ user, setUser}}>
   <IonApp>
     <IonReactRouter>
       <IonTabs>
@@ -84,6 +143,7 @@ const App: React.FC = () => (
       </IonTabs>
     </IonReactRouter>
   </IonApp>
-);
+  </UserContext.Provider>
+);*/
 
 export default App;
