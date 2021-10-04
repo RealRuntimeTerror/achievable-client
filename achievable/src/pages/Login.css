@@ -1,0 +1,15 @@
+.h1title {
+    text-align:center;
+  }
+
+.btn_login{
+    margin: 10vh auto;
+    display: block;
+}
+
+.div_btn_login{
+    width: 100%;
+    display: flex;
+justify-content: center;
+}
+

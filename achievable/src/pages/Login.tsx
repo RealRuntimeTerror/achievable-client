@@ -33,26 +33,22 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Login</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <GoogleLogin
+
+      <IonContent>
+  
+        <h1 className="h1title">Achievable</h1>
+
+      <div className="div_btn_login">
+        <GoogleLogin 
+            className="btn_login"   
             clientId="587554543385-f080e0lh7r7ua8apv5744s8sd1g2vth6.apps.googleusercontent.com"
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
         />
+      </div>
         <br/>
-        <p>sign in status: {state.isSignedIn?"siged in successfully":"not signed in"}</p>
       </IonContent>
     </IonPage>
   );

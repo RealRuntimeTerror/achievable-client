@@ -42,16 +42,17 @@ const Tab1: React.FC = () => {
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonRow className="ion-align-items-center ion-justify-content-center">
+        <IonRow className="center ion-align-items-center ion-justify-content-center">
           <IonCol className="ion-align-items-center ion-justify-content-center">
             <IonAvatar className="ion-align-items-center ion-justify-content-center">
             <img src={state.user.imageUrl} alt={state.user.name}/>
             </IonAvatar>
               <p>name:&#09;{state.user.name}</p>
               <p>googleId:&#09;{state.user.googleId}</p>
+              <IonButton color="danger" onClick={logOut}>Log out</IonButton>
             </IonCol>
             </IonRow>
-        <IonButton color="danger" onClick={logOut}>Log out</IonButton>
+        
       </IonContent>
     </IonPage>
   );
