@@ -14,7 +14,6 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import "./Log.css";
-import { Controller, useForm } from "react-hook-form";
 
 interface ContainerProps {
   activities: any;
