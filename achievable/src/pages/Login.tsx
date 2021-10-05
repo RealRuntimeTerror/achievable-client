@@ -10,6 +10,7 @@ import "./Login.css";
 import GoogleLogin from 'react-google-login';
 import {useContext} from 'react';
 import {useState, IUser, IState} from '../StateContext';
+import axios from "../util/axios";
  
 
 
@@ -21,14 +22,24 @@ const Login: React.FC = () => {
   const responseGoogle = (response: any) => {
     console.log(response);
     console.log(response.profileObj);
-    if(response.profileObj!=null)
-      setState({
-        user:{
+    if(response.profileObj!=null){
+      const user={
         name:response.profileObj.name,
         googleId:response.profileObj.googleId,
-        imageUrl:response.profileObj.imageUrl},
+        imageUrl:response.profileObj.imageUrl
+      }
+      console.log(user);
+      setState({
+        user:user,
         isSignedIn: true
       })
+      
+      axios.post("users/auth",user)
+      .then((res)=>{
+        console.log("user auth res")
+        console.log(res)
+      })
+    }  
   }
 
   return (
