@@ -16,7 +16,7 @@ import { useState } from "react";
 import "./Log.css";
 
 interface ContainerProps {
-  activities: string[];
+  activities: any;
 }
 
 const Log: React.FC<ContainerProps> = ({ activities }) => {
@@ -35,10 +35,10 @@ const Log: React.FC<ContainerProps> = ({ activities }) => {
           <IonItem>
             <IonLabel position="floating">Activity</IonLabel>
             <IonSelect interface="popover">
-              {activities.map((activities) => {
+              {activities.map((activity: any) => {
                 return (
-                  <IonSelectOption key={activities} value={activities}>
-                    {activities}
+                  <IonSelectOption key={activity._id} value={activity}>
+                    {activity.activityName}
                   </IonSelectOption>
                 );
               })}
@@ -60,8 +60,8 @@ const Log: React.FC<ContainerProps> = ({ activities }) => {
             expand="block"
             onClick={() => {
               console.log("Clicked Log");
-              console.log(activity);
-              console.log(time);
+              // console.log(activity);
+              // console.log(time);
               logActivity();
             }}
           >
