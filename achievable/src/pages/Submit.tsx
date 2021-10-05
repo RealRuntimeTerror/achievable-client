@@ -50,18 +50,6 @@ export const ActivityModal: React.FC = () => {
   console.log(errors);
 
   const [showModal, setShowModal] = useState(false);
-  const addActivity = () => {
-    const activity = {
-      activityName: "test activity 9",
-      description: "test desc 2",
-    };
-    axios
-      .patch("activities/" + "615c3c031b90963a96e2c934", activity)
-      .then((res) => {
-        console.log("submit activity res:");
-        console.log(res);
-      });
-  };
 
   return (
     <IonCard>
@@ -90,9 +78,11 @@ export const ActivityModal: React.FC = () => {
               />
             </IonItem>
 
-            <IonButton type="submit">Add Activity</IonButton>
+            <IonButton expand="block" type="submit">
+              Add Activity
+            </IonButton>
           </form>
-          <IonButton onClick={addActivity}>Add Activity</IonButton>
+
           <IonButton
             className="ion-margin-top"
             expand="block"

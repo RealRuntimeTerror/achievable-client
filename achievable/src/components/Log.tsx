@@ -37,7 +37,7 @@ const Log: React.FC<ContainerProps> = ({ activities }) => {
             <IonSelect interface="popover">
               {activities.map((activity: any) => {
                 return (
-                  <IonSelectOption key={activity.activityName} value={activity}>
+                  <IonSelectOption key={activity._id} value={activity}>
                     {activity.activityName}
                   </IonSelectOption>
                 );
