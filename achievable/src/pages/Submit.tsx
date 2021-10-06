@@ -48,6 +48,7 @@ export const ActivityModal: React.FC = () => {
       });
   };
   console.log(errors);
+  console.log("test");
 
   const [showModal, setShowModal] = useState(false);
 
