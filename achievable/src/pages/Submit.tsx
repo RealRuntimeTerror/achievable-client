@@ -8,52 +8,117 @@ import {
   IonToolbar,
   useIonViewDidEnter,
   IonModal,
+  IonRow,
+  IonCard,
+  IonItem,
+  IonGrid,
+  IonCol,
+  IonCardHeader,
+  IonCardContent,
+  IonList,
+  IonInput,
+  IonTextarea,
+  IonLabel,
 } from "@ionic/react";
 import Log from "../components/Log";
 import "./Submit.css";
-import axios from "axios";
+import axios from "../util/axios";
+import { Controller, useForm } from "react-hook-form";
 
 export const ActivityModal: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
-  const addActivity = () => {
-    console.log("Skenos adding activity");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => {
+    console.log(data);
+
     const activity = {
-      activityName: "test activity",
-      description: "test desc",
-      activityColor: "blue",
+      activityName: data.ActivityName,
+      description: data.ActivityDescription,
     };
-    axios.post("/activities/", activity).then((res) => {
-      console.log("submit res:");
-      console.log(res);
-    });
+
+    console.log("Skenos adding activity");
+    axios
+      .patch("activities/" + "615c3c031b90963a96e2c934", activity)
+      .then((res) => {
+        console.log("submit activity res:");
+        console.log(res);
+      });
   };
+  console.log(errors);
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <IonContent>
-      <IonModal isOpen={showModal} cssClass="my-custom-class">
-        <IonButton onClick={addActivity}>Add Activity</IonButton>
+    <IonCard>
+      <IonCardContent>
+        <IonModal isOpen={showModal} cssClass="my-custom-class">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <IonItem>
+              <IonLabel position="floating">Activity Name</IonLabel>
+
+              <IonInput
+                type="text"
+                placeholder="Activity Name"
+                {...register("ActivityName", {
+                  required: true,
+                  maxLength: 80,
+                })}
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel position="floating">Activity Description</IonLabel>
+              <IonTextarea
+                {...register("ActivityDescription", {
+                  required: true,
+                  maxLength: 200,
+                })}
+              />
+            </IonItem>
+
+            <IonButton expand="block" type="submit">
+              Add Activity
+            </IonButton>
+          </form>
+
+          <IonButton
+            className="ion-margin-top"
+            expand="block"
+            onClick={() => {
+              setShowModal(false);
+            }}
+          >
+            close
+          </IonButton>
+        </IonModal>
         <IonButton
           className="ion-margin-top"
           expand="block"
-          onClick={() => setShowModal(false)}
+          onClick={() => setShowModal(true)}
         >
-          Cancel
+          Add Activity
         </IonButton>
-      </IonModal>
-      <IonButton
-        className="ion-margin-top"
-        expand="block"
-        onClick={() => setShowModal(true)}
-      >
-        Add Activity
-      </IonButton>
-    </IonContent>
+      </IonCardContent>
+    </IonCard>
   );
 };
 
 const Submit: React.FC = () => {
+  const [activities, setActivities] = useState([]);
+
+  const getActivityList = () => {
+    console.log("get activity list");
+    axios.get("activities/615c3c031b90963a96e2c934").then((res) => {
+      console.log("Activity List");
+      setActivities(res.data);
+      console.log(activities);
+    });
+  };
+
   useIonViewDidEnter(() => {
-    console.log("need to render activity list");
+    getActivityList();
   });
 
   return (
@@ -69,10 +134,9 @@ const Submit: React.FC = () => {
             <IonTitle size="large">Log</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Log activities={["Math", "Science", "Music", "Gym", "Coding"]} />
-      </IonContent>
 
-      <IonContent>
+        <Log activities={activities} />
+
         <ActivityModal />
       </IonContent>
     </IonPage>
