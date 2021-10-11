@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/repo/achievable/
+    working_directory: ~/repo/
     docker:
       - image: cimg/node:12.16
     steps:
@@ -9,6 +9,9 @@ jobs:
       - run:
           name: update-npm
           command: "sudo npm install -g npm@5"
+          - run:
+            name: change-working_directory
+            command: cd ./achievable/
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
