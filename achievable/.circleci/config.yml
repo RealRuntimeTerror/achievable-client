@@ -1,7 +1,8 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: ~/achievable
+
     docker:
       - image: cimg/node:12.16
     steps:
