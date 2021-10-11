@@ -24,7 +24,7 @@ const Log: React.FC<ContainerProps> = ({ activities }) => {
   const [time, setTime] = useState("noTime");
 
   const logActivity = () => {
-    alert("Activity Logged");
+    alert("Activity Logged ");
   };
 
   return (
