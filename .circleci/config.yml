@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+        name: change-inner-directory
+        command: "cd ./achievable/"
+      - run:
           name: update-npm
           command: "sudo npm install -g npm@5"
       - restore_cache:
